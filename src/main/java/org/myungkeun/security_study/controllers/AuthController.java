@@ -2,6 +2,7 @@ package org.myungkeun.security_study.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.myungkeun.security_study.entities.Member;
+import org.myungkeun.security_study.payload.LoginRequest;
 import org.myungkeun.security_study.payload.RegisterRequest;
 import org.myungkeun.security_study.services.AuthService;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,16 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/singup")
-    public ResponseEntity<Member> registerUser(
+    public ResponseEntity<Member> registerMember(
             @RequestBody RegisterRequest registerRequest
     ) {
         return new ResponseEntity<>(authService.registerUser(registerRequest), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Member> loginMember(
+            @RequestBody LoginRequest loginRequest
+    ) {
+        return new ResponseEntity<>(authService.loginUser(loginRequest), HttpStatus.OK);
     }
 }
